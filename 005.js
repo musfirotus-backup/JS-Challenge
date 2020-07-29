@@ -1,27 +1,24 @@
-let n1 = 1000;
-const number = [...Array(n1 + 1).keys()];
-
-const evens = number.filter((x) => {
-    return x % 2 === 0;
-});
-
-const odds = number.filter((x) => {
-    return x % 2 === 1;
-});
-
+const number = [...Array(1000 + 1).keys()];
+const evens = number.filter(x => x % 2 === 0);
+const odds = number.filter(x => x % 2 === 1);
 const multiply5 = number.map(x => x * 5);
-
-const prime = number.filter((x) => {
-    for (let i = 2; x > i; i++) {
-        if (x % i == 0) {
-            return false;
-        }
+const prime = (number = 0) => {
+    if (number < 2) {
+      return false
     }
-    return x > 1;
-});
+  
+    for (let index = 2; index < number; index++) {
+      if (number % index == 0) {
+        return false;
+      } else {
+        continue;
+      }
+    }
+    return true;
+}
+
 console.log('Bilangan Genap :\n' + evens);
 console.log('Bilangan Ganjil :\n' + odds);
 console.log('Bilangan multiply5 :\n' + multiply5);
-console.log('Bilangan Prima :\n' + prime);
-const prime100 = prime.splice(24);
-console.log('Bilangan Prima Kurang dari 100 :\n' + prime);
+console.log("Bilangan prima :\n" + (number.filter((value) => prime(value))));
+console.log("Bilangan prima kurang dari 100 :\n" + (number.filter((value) => prime(value) && value < 100)));
