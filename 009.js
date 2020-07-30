@@ -1,5 +1,5 @@
-const purchase = [{
-
+const purchase = [
+    {
         order_id: "SO-921",
         created_at: "2018-02-17T03:24:12",
         customer: {
@@ -125,5 +125,24 @@ const purchase = [{
     }
 ];
 
-
-console.log(purchase.filter(el => el == '-02-'));
+console.log(purchase.filter((el) => new Date(el.created_at).getMonth() == 1));
+console.log(purchase.filter((el) => el.customer.name == "Ari"));
+console.log("Total :",
+    purchase
+        .filter((val) => val.customer.name == "Ari")
+        .map(
+            (val) => val.items.map(
+                (item) => item.qty * item.price
+            ).reduce((acc, val) => acc + val)
+        )
+        .reduce((x, y) => x + y)
+);
+console.log([
+    ...new Set(
+        purchase
+            .filter((val) => val.items.map(
+                (item) => item.qty * item.price
+            ).reduce((acc, val) => acc + val) < 300000)
+            .map((val) => val.customer.name)
+    )
+]);
